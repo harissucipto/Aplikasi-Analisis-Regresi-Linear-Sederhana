@@ -26,10 +26,11 @@ var xNumber = document.querySelector("#Xnumber");
 var buttonCariY = document.querySelector("#cariY");
 var hasilY = document.querySelector("#hasilY");
 var hasilTable = document.querySelector("#hasilTable");
+var solusiRumus = document.querySelector("#solusiRumus");
 
 buttonCariY.addEventListener("click", function() {
     y = a + (b * Number(xNumber.value));
-    hasilY.innerHTML = y.toFixed(2);
+    hasilY.innerHTML = "Y = " + y.toFixed(2);
 });
 
 
@@ -67,6 +68,8 @@ buttonProses.addEventListener("click", function() {
     ambilJumlahNilai();
     pecahkanRumus();
     cetakTableHasil();
+    cetakKonsataA();
+    cetakKonsataB();
 });
 
 
@@ -121,8 +124,24 @@ function cetakTableHasil() {
         '"readonly="readonly"> <input class="ex2" type="text"  value="Ey2 = ' + jumlahNilaiYKuadrat +
         '"readonly="readonly"> <input class="exkaliy" type="text"  value="Ex*y = ' + jumlahNilaiXkaliY +
         '"readonly="readonly"> <\p>';
-
-
     hasilTable.innerHTML = textsnya;
+}
 
+function cetakKonsataA() {
+    var teks = "<p>a = ((Ey)(Ex2) - (Ey)(Exy)) / n(Ex2) - (Ex)p2</p>";
+    teks += "<p>a = ((" + jumlahNilaiY + ")(" + jumlahNilaiXkuadrat + ") - (" + jumlahNilaiY +
+        ")(" + jumlahNilaiXkaliY + ")) / " + jumlahData + "(" + jumlahNilaiXkuadrat + ") - (" +
+        jumlahNilaiX + ")p2</p>";
+    teks += "<p>a = " + a + "</p><hr>";
+    solusiRumus.innerHTML = teks;
+}
+
+function cetakKonsataB() {
+    var teks = solusiRumus.innerHTML;
+    teks += "<p>b = (n(Exy) - (Ex)(Ey)) / n(Ex2) - (Ex)p2</p>";
+    teks += "<p>a = (" + jumlahData + "(" + jumlahNilaiXkaliY + ") - (" + jumlahNilaiX +
+        ")(" + jumlahNilaiY + ")) / " + jumlahData + "(" + jumlahNilaiXkuadrat + ") - (" +
+        jumlahNilaiX + ")p2</p>";
+    teks += "<p>b = " + b + "</p>";
+    solusiRumus.innerHTML = teks;
 }

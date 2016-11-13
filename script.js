@@ -25,6 +25,7 @@ var y;
 var xNumber = document.querySelector("#Xnumber");
 var buttonCariY = document.querySelector("#cariY");
 var hasilY = document.querySelector("#hasilY");
+var hasilTable = document.querySelector("#hasilTable");
 
 buttonCariY.addEventListener("click", function() {
     y = a + (b * Number(xNumber.value));
@@ -62,14 +63,10 @@ buttonProses.addEventListener("click", function() {
         nilaiXkaliY[i] = nilaiX[i] * nilaiY[i];
     }
     // lakukan pencarian nilai jumlah tiap varible arraay
-    jumlahNilaiX = penumlahanNilai(nilaiX);
-    jumlahNilaiY = penumlahanNilai(nilaiY);
-    jumlahNilaiXkaliY = penumlahanNilai(nilaiXkaliY);
-    jumlahNilaiXkuadrat = penumlahanNilai(nilaiXkuadrat);
-    jumlahNilaiYKuadrat = penumlahanNilai(nilaiYkuadrat);
-    a = hitungA();
-    b = hitungB();
+
+    ambilJumlahNilai();
     pecahkanRumus();
+    cetakTableHasil();
 });
 
 
@@ -92,5 +89,40 @@ function hitungB() {
 function pecahkanRumus() {
     hasil.style.display = "block";
     rumusnya.textContent = "Y = " + a + " + " + b + " * X ";
+
+}
+
+function ambilJumlahNilai() {
+    jumlahNilaiX = penumlahanNilai(nilaiX);
+    jumlahNilaiY = penumlahanNilai(nilaiY);
+    jumlahNilaiXkaliY = penumlahanNilai(nilaiXkaliY);
+    jumlahNilaiXkuadrat = penumlahanNilai(nilaiXkuadrat);
+    jumlahNilaiYKuadrat = penumlahanNilai(nilaiYkuadrat);
+    a = hitungA();
+    b = hitungB();
+}
+
+function cetakTableHasil() {
+    jumlahData = Number(banyakData.value);
+    var textsnya = "";
+    var no = 0;
+    for (var i = 0; i < jumlahData; i++) {
+        no++;
+        textsnya += '<p>' + no + ' <input class="x" type="number" value="' + nilaiX[i] +
+            '" readonly="readonly"> <input class="y" type="number"  value="' + nilaiY[i] +
+            '"readonly="readonly"> <input class="x2" type="number"  value="' + nilaiXkuadrat[i] +
+            '"readonly="readonly"> <input class="x2" type="number"  value="' + nilaiYkuadrat[i] +
+            '"readonly="readonly"> <input class="xkaliy" type="number"  value="' + nilaiXkaliY[i] +
+            '"readonly="readonly"> <\p>';
+    }
+    textsnya += '<p> <input class="ex" type="text" value="Ex = ' + jumlahNilaiX +
+        '" readonly="readonly"> <input class="ey" type="text"  value="Ey = ' + jumlahNilaiY +
+        '"readonly="readonly"> <input class="ex2" type="text"  value="Ex2 = ' + jumlahNilaiXkuadrat +
+        '"readonly="readonly"> <input class="ex2" type="text"  value="Ey2 = ' + jumlahNilaiYKuadrat +
+        '"readonly="readonly"> <input class="exkaliy" type="text"  value="Ex*y = ' + jumlahNilaiXkaliY +
+        '"readonly="readonly"> <\p>';
+
+
+    hasilTable.innerHTML = textsnya;
 
 }

@@ -4,4 +4,6 @@ Analisis Regresi Linear Sederhana – Regresi Linear Sederhana adalah Metode Sta
 aplikasi yang digunakan untuk mengetahui nilai ke y berdasrkan data x yang telah diketahui,
 maka akan dilakukan permalan nilai y tersebut
 
+[klik disini untuk mencoba aplikasi](http://codepen.io/harissucipto/full/dOMJwB/)
+
 #code and write by: Haris Sucipto

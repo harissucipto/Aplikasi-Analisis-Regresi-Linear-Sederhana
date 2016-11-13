@@ -1,0 +1,11 @@
+input {
+    text-align: center;
+}
+
+div#kolomData {
+    display: none;
+}
+
+div#hasil {
+    display: none;
+}

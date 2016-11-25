@@ -27,6 +27,9 @@ var buttonCariY = document.querySelector("#cariY");
 var hasilY = document.querySelector("#hasilY");
 var hasilTable = document.querySelector("#hasilTable");
 var solusiRumus = document.querySelector("#solusiRumus");
+var Hkorelasi = document.querySelector("#korelasi");
+var HrumusKorelasi = document.querySelector("#rumuskorelasi");
+var kesimpulanKorelasiHasil = document.querySelector("#kesimpulankorelasi");
 
 buttonCariY.addEventListener("click", function() {
     y = a + (b * Number(xNumber.value));
@@ -70,8 +73,15 @@ buttonProses.addEventListener("click", function() {
     cetakTableHasil();
     cetakKonsataA();
     cetakKonsataB();
+    cetakKorelasi();
+    kesimpulanKorelasi();
+    masukanMatikan();
+
 });
 
+function masukanMatikan() {
+    buttonMasukan.disabled = true;
+}
 
 function penumlahanNilai(data) {
     return data.reduce(function(a, b) {
@@ -144,4 +154,43 @@ function cetakKonsataB() {
         jumlahNilaiX + ")p2</p>";
     teks += "<p>b = " + b + "</p>";
     solusiRumus.innerHTML = teks;
+}
+
+function korelasi() {
+    var korelasia = (jumlahData * jumlahNilaiXkaliY) - (jumlahNilaiX * jumlahNilaiY);
+    var korelasib = Math.sqrt(((jumlahData * jumlahNilaiXkuadrat) - Math.pow(jumlahNilaiX, 2)) * (
+        (jumlahData * jumlahNilaiYKuadrat) - Math.pow(jumlahNilaiY, 2)));
+    var korelasi = korelasia / korelasib;
+    return korelasi.toFixed(2);
+}
+
+function rumusKorelasi() {
+    var rumusKorelasi = "r = (" + jumlahData + "*" + jumlahNilaiXkaliY + ") - (" + jumlahNilaiX + "*" + jumlahNilaiY + ")";
+    rumusKorelasi += " / akar((" + jumlahData + "*" + jumlahNilaiXkuadrat + ") - pangkat2(" + jumlahNilaiX + ") * ( (" +
+        jumlahData + "*" + jumlahNilaiYKuadrat + ") - pangkat2(" + jumlahNilaiY + ") )";
+    HrumusKorelasi.textContent = rumusKorelasi;
+}
+
+function cetakKorelasi() {
+    rumusKorelasi();
+    Hkorelasi.textContent = korelasi();
+}
+
+function kesimpulanKorelasi() {
+    var hasilKesimpulan = korelasi();
+    var kesimpulan = "Jadi Korelasinya ";
+    if (hasilKesimpulan <= 0) {
+        kesimpulan += " Tidak ada korelasi diantar dua variable (0 atau < 0)";
+    } else if (hasilKesimpulan <= 0.25) {
+        kesimpulan += " Korelasi sangat lemah (>0 - 0,25)";
+    } else if (hasilKesimpulan <= 0.5) {
+        kesimpulan += " Korelasi cukup  (>0.25 - 0.5)";
+    } else if (hasilKesimpulan <= 0.75) {
+        kesimpulan += " Korelasi kuat (>0.5 - 0.75)";
+    } else if (hasilKesimpulan <= 0.99) {
+        kesimpulan += " Korelasi sangat kuat (>0.75 - 0.99)";
+    } else if (hasilKesimpulan <= 1) {
+        kesimpulan += " Korelasi sempurna (>0.99 - 1)";
+    }
+    kesimpulanKorelasiHasil.textContent = kesimpulan;
 }
